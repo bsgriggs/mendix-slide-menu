@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget
+    id="mendix.slidemenu.SlideMenu"
+    pluginWidget="true"
+    needsEntityContext="true"
+    offlineCapable="true"
+    supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd"
+>
+    <name>Slide Menu</name>
+    <description>My widget description</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <property key="content" type="widgets" required="true">
+                <caption>Content</caption>
+                <description />
+            </property>
+            <property key="screenSide" type="enumeration" defaultValue="RIGHT">
+                <caption>Screen side</caption>
+                <description />
+                <enumerationValues>
+                    <enumerationValue key="LEFT">Left</enumerationValue>
+                    <enumerationValue key="RIGHT">Right</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="caption" type="textTemplate" required="true">
+                <caption>Caption</caption>
+                <description>Text of the tab</description>
+            </property>
+            <property key="pageName" type="attribute" required="true">
+                <caption>Page name</caption>
+                <description>String attribute the holds the name of the current page</description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
