@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <widget
     id="mendix.slidemenu.SlideMenu"
     pluginWidget="true"
@@ -14,8 +14,12 @@
     <icon />
     <properties>
         <propertyGroup caption="General">
-            <property key="content" type="widgets" required="true">
-                <caption>Content</caption>
+            <property key="tabContent" type="widgets" required="true">
+                <caption>Tab content</caption>
+                <description />
+            </property>
+            <property key="menuContent" type="widgets" required="true">
+                <caption>Menu content</caption>
                 <description />
             </property>
             <property key="screenSide" type="enumeration" defaultValue="RIGHT">
@@ -26,16 +30,35 @@
                     <enumerationValue key="RIGHT">Right</enumerationValue>
                 </enumerationValues>
             </property>
-            <property key="caption" type="textTemplate" required="true">
-                <caption>Caption</caption>
-                <description>Text of the tab</description>
-            </property>
-            <property key="pageName" type="attribute" required="true">
+            <property key="pageName" type="attribute" required="false">
                 <caption>Page name</caption>
                 <description>String attribute the holds the name of the current page</description>
                 <attributeTypes>
                     <attributeType name="String" />
                 </attributeTypes>
+            </property>
+            <property key="center" type="boolean" defaultValue="true">
+                <caption>Center?</caption>
+                <description>Centers the tag in the screen</description>
+            </property>
+            <property key="topOffset" type="expression" defaultValue="'20rem'">
+                <caption>Top offset</caption>
+                <description>CSS value to move the tag from the top of the screen</description>
+                <returnType type="String" />
+            </property>
+            <property key="menuWidth" type="expression" defaultValue="'40rem'">
+                <caption>Menu width</caption>
+                <description>CSS value of the menu's width while open</description>
+                <returnType type="String" />
+            </property>
+            <property key="onTabClick" type="action">
+                <caption>On tab click</caption>
+                <description></description>
+            </property>
+            <property key="closeClickOutside" type="expression" defaultValue="true">
+                <caption>Close on click outside?</caption>
+                <description>Collapses the menu when the user clicks outside of it</description>
+                <returnType type="Boolean" />
             </property>
         </propertyGroup>
     </properties>

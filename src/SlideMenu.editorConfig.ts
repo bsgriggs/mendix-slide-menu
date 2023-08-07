@@ -1,4 +1,5 @@
 import { SlideMenuPreviewProps } from "../typings/SlideMenuProps";
+import { hidePropertyIn } from "@mendix/pluggable-widgets-tools";
 
 export type Platform = "web" | "desktop";
 
@@ -104,12 +105,10 @@ export function getProperties(
     defaultProperties: Properties
     // target: Platform
 ): Properties {
-    // Do the values manipulation here to control the visibility of properties in Studio and Studio Pro conditionally.
-    /* Example
-    if (values.myProperty === "custom") {
-        delete defaultProperties.properties.myOtherProperty;
+    if (_values.center) {
+        hidePropertyIn(defaultProperties, _values, "topOffset");
     }
-    */
+
     return defaultProperties;
 }
 

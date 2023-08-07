@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export type ScreenSideEnum = "LEFT" | "RIGHT";
 
@@ -13,10 +13,15 @@ export interface SlideMenuContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    content: ReactNode;
+    tabContent: ReactNode;
+    menuContent: ReactNode;
     screenSide: ScreenSideEnum;
-    caption: DynamicValue<string>;
-    pageName: EditableValue<string>;
+    pageName?: EditableValue<string>;
+    center: boolean;
+    topOffset: DynamicValue<string>;
+    menuWidth: DynamicValue<string>;
+    onTabClick?: ActionValue;
+    closeClickOutside: DynamicValue<boolean>;
 }
 
 export interface SlideMenuPreviewProps {
@@ -24,8 +29,13 @@ export interface SlideMenuPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
-    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    tabContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    menuContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     screenSide: ScreenSideEnum;
-    caption: string;
     pageName: string;
+    center: boolean;
+    topOffset: string;
+    menuWidth: string;
+    onTabClick: {} | null;
+    closeClickOutside: string;
 }

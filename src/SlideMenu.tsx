@@ -2,51 +2,76 @@ import React, { createElement } from "react";
 import { SlideMenuContainerProps } from "../typings/SlideMenuProps";
 import "./ui/SlideMenu.scss";
 import classNames from "classnames";
+import { createPortal } from "react-dom";
 import MxPageName from "./utils/MxPageName";
-import { ValueStatus } from "mendix";
+import useOnClickOutside from "./utils/useOnClickOutside";
 
 export function SlideMenu({
-    name,
     class: className,
     style,
     tabIndex,
-    caption,
+    tabContent,
     screenSide,
-    content,
-    pageName
+    menuContent,
+    pageName,
+    topOffset,
+    menuWidth,
+    center,
+    onTabClick,
+    closeClickOutside
 }: SlideMenuContainerProps): React.ReactElement {
     const [showMenu, setShowMenu] = React.useState<boolean>(false);
-    // const [reRender, setReRender] = React.useState<boolean>(false);
+    const menuRef = React.useRef<HTMLDivElement>(null);
 
-    React.useEffect(() => {
-        console.info(pageName);
-        if (pageName.status === ValueStatus.Available) {
-            const newPageName = MxPageName();
-            console.info(newPageName);
-            pageName.setValue(newPageName);
+    const onClickHandler = (): void => {
+        setShowMenu(!showMenu);
+        pageName?.setValue(MxPageName());
+        onTabClick?.execute();
+    };
+
+    useOnClickOutside(menuRef, () => {
+        if (showMenu && (closeClickOutside.value as boolean)) {
+            setShowMenu(!showMenu);
         }
-    }, [showMenu]);
+        pageName?.setValue(MxPageName());
+    });
 
-    return (
+    return createPortal(
         <div
-            id={name}
             className={classNames(
                 "slide-menu",
                 className,
-                { left: screenSide === "LEFT" },
-                { right: screenSide === "RIGHT" }
+                showMenu ? "open" : "closed",
+                screenSide === "LEFT" ? "left" : "right",
+                { center: center }
             )}
             style={style}
+            ref={menuRef}
         >
-            <button tabIndex={tabIndex || 0} aria-label={caption.value} onClick={() => setShowMenu(!showMenu)}>
-                {caption.value as string}
+            <button
+                className="btn mx-button tag"
+                style={{
+                    top: center ? "50%" : topOffset.value,
+                    right: screenSide === "RIGHT" ? (showMenu ? (menuWidth.value as string) : 0) : undefined,
+                    left: screenSide === "LEFT" ? (showMenu ? (menuWidth.value as string) : 0) : undefined
+                }}
+                tabIndex={tabIndex || 0}
+                onClick={onClickHandler}
+            >
+                {tabContent}
             </button>
-            {showMenu && (
-                <div>
-                    <p>{pageName.displayValue}</p>
-                    {content}
-                </div>
-            )}
-        </div>
+            <div
+                className="menu background-secondary"
+                aria-hidden={!showMenu}
+                style={{
+                    width: menuWidth.value as string,
+                    right: screenSide === "RIGHT" ? (showMenu ? 0 : `-${menuWidth.value as string}`) : undefined,
+                    left: screenSide === "LEFT" ? (showMenu ? 0 : `-${menuWidth.value as string}`) : undefined
+                }}
+            >
+                {menuContent}
+            </div>
+        </div>,
+        document.body
     );
 }
