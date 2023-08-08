@@ -5,71 +5,145 @@ import classNames from "classnames";
 import { createPortal } from "react-dom";
 import MxPageName from "./utils/MxPageName";
 import useOnClickOutside from "./utils/useOnClickOutside";
+import { ActionValue } from "mendix";
 
-export function SlideMenu({
-    class: className,
-    style,
-    tabIndex,
-    tabContent,
-    screenSide,
-    menuContent,
-    pageName,
-    topOffset,
-    menuWidth,
-    center,
-    onTabClick,
-    closeClickOutside
-}: SlideMenuContainerProps): React.ReactElement {
+export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
     const [showMenu, setShowMenu] = React.useState<boolean>(false);
     const menuRef = React.useRef<HTMLDivElement>(null);
 
+    const debugLog = React.useCallback((message?: any, ...optionalParams: any[]) => {
+        if (props.debugMode) {
+            console.log(message, ...optionalParams);
+        }
+    }, []);
+
+    const updatePageName = React.useCallback(() => {
+        const newPageName = MxPageName();
+        if (props.pageName?.value !== newPageName) {
+            debugLog("updatePageName", `changing page name from '${props.pageName?.value}' to '${newPageName}'`);
+            props.pageName?.setValue(newPageName);
+        }
+    }, [props.pageName]);
+
+    const callMxAction = React.useCallback((mxAction: ActionValue | undefined, actionName: string) => {
+        if (mxAction) {
+            if (mxAction.canExecute) {
+                mxAction.execute();
+            } else {
+                debugLog("callMxAction", `user does not have permission to call action '${actionName}'`);
+            }
+        }
+    }, []);
+
     const onClickHandler = (): void => {
         setShowMenu(!showMenu);
-        pageName?.setValue(MxPageName());
-        onTabClick?.execute();
+        updatePageName();
+        callMxAction(props.onTabClick, "onTabClick");
     };
 
     useOnClickOutside(menuRef, () => {
-        if (showMenu && (closeClickOutside.value as boolean)) {
-            setShowMenu(!showMenu);
+        debugLog("onClickOutside", "Click outside of the slide menu detected");
+        if (showMenu && (props.closeClickOutside.value as boolean)) {
+            debugLog("onClickOutside", "closing the menu");
+            setShowMenu(false);
         }
-        pageName?.setValue(MxPageName());
+        updatePageName();
+        callMxAction(props.onClickOutside, "onClickOutside");
     });
+
+    //polling to check the page name
+    React.useEffect(() => {
+        if (props.pageName && props.intervalOffset > 0) {
+            const interval = setInterval(() => {
+                debugLog("polling page name", MxPageName());
+                updatePageName();
+            }, props.intervalOffset);
+            return () => clearInterval(interval);
+        }
+    }, [props.pageName]);
+
+    debugLog("props", props);
+
+    debugLog("state", { showMenu, menuRef });
 
     return createPortal(
         <div
             className={classNames(
                 "slide-menu",
-                className,
+                props.class,
                 showMenu ? "open" : "closed",
-                screenSide === "LEFT" ? "left" : "right",
-                { center: center }
+                props.screenSide.toLowerCase(),
+                {
+                    center: props.center
+                }
             )}
-            style={style}
+            style={props.style}
             ref={menuRef}
         >
             <button
                 className="btn mx-button tag"
                 style={{
-                    top: center ? "50%" : topOffset.value,
-                    right: screenSide === "RIGHT" ? (showMenu ? (menuWidth.value as string) : 0) : undefined,
-                    left: screenSide === "LEFT" ? (showMenu ? (menuWidth.value as string) : 0) : undefined
+                    top:
+                        props.screenSide === "LEFT" || props.screenSide === "RIGHT"
+                            ? props.center
+                                ? "50%"
+                                : props.tagOffset.value
+                            : props.screenSide === "TOP"
+                            ? showMenu
+                                ? (props.menuGirth.value as string)
+                                : 0
+                            : undefined,
+                    left:
+                        props.screenSide === "TOP" || props.screenSide === "BOTTOM"
+                            ? props.center
+                                ? "50%"
+                                : props.tagOffset.value
+                            : props.screenSide === "LEFT"
+                            ? showMenu
+                                ? (props.menuGirth.value as string)
+                                : 0
+                            : undefined,
+                    right:
+                        props.screenSide === "RIGHT" ? (showMenu ? (props.menuGirth.value as string) : 0) : undefined,
+                    bottom:
+                        props.screenSide === "BOTTOM" ? (showMenu ? (props.menuGirth.value as string) : 0) : undefined
                 }}
-                tabIndex={tabIndex || 0}
+                tabIndex={props.tabIndex || 0}
                 onClick={onClickHandler}
             >
-                {tabContent}
+                {props.tagType === "TEXT" ? props.tagText.value : props.tagContent}
             </button>
             <div
-                className="menu background-secondary"
+                className="menu background-main"
                 aria-hidden={!showMenu}
                 style={{
-                    width: menuWidth.value as string,
-                    right: screenSide === "RIGHT" ? (showMenu ? 0 : `-${menuWidth.value as string}`) : undefined,
-                    left: screenSide === "LEFT" ? (showMenu ? 0 : `-${menuWidth.value as string}`) : undefined
+                    width:
+                        props.screenSide === "RIGHT" || props.screenSide === "LEFT"
+                            ? (props.menuGirth.value as string)
+                            : "100vw",
+                    height:
+                        props.screenSide === "TOP" || props.screenSide === "BOTTOM"
+                            ? (props.menuGirth.value as string)
+                            : "100vh",
+                    top:
+                        props.screenSide === "TOP" ? (showMenu ? 0 : `-${props.menuGirth.value as string}`) : undefined,
+                    right:
+                        props.screenSide === "RIGHT"
+                            ? showMenu
+                                ? 0
+                                : `-${props.menuGirth.value as string}`
+                            : undefined,
+                    bottom:
+                        props.screenSide === "BOTTOM"
+                            ? showMenu
+                                ? 0
+                                : `-${props.menuGirth.value as string}`
+                            : undefined,
+                    left:
+                        props.screenSide === "LEFT" ? (showMenu ? 0 : `-${props.menuGirth.value as string}`) : undefined
                 }}
             >
-                {menuContent}
+                {props.menuContent}
             </div>
         </div>,
         document.body

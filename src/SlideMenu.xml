@@ -14,52 +14,105 @@
     <icon />
     <properties>
         <propertyGroup caption="General">
-            <property key="tabContent" type="widgets" required="true">
-                <caption>Tab content</caption>
-                <description />
-            </property>
-            <property key="menuContent" type="widgets" required="true">
-                <caption>Menu content</caption>
-                <description />
-            </property>
-            <property key="screenSide" type="enumeration" defaultValue="RIGHT">
-                <caption>Screen side</caption>
-                <description />
-                <enumerationValues>
-                    <enumerationValue key="LEFT">Left</enumerationValue>
-                    <enumerationValue key="RIGHT">Right</enumerationValue>
-                </enumerationValues>
-            </property>
-            <property key="pageName" type="attribute" required="false">
-                <caption>Page name</caption>
-                <description>String attribute the holds the name of the current page</description>
-                <attributeTypes>
-                    <attributeType name="String" />
-                </attributeTypes>
-            </property>
-            <property key="center" type="boolean" defaultValue="true">
-                <caption>Center?</caption>
-                <description>Centers the tag in the screen</description>
-            </property>
-            <property key="topOffset" type="expression" defaultValue="'20rem'">
-                <caption>Top offset</caption>
-                <description>CSS value to move the tag from the top of the screen</description>
-                <returnType type="String" />
-            </property>
-            <property key="menuWidth" type="expression" defaultValue="'40rem'">
-                <caption>Menu width</caption>
-                <description>CSS value of the menu's width while open</description>
-                <returnType type="String" />
-            </property>
-            <property key="onTabClick" type="action">
-                <caption>On tab click</caption>
-                <description></description>
-            </property>
-            <property key="closeClickOutside" type="expression" defaultValue="true">
-                <caption>Close on click outside?</caption>
-                <description>Collapses the menu when the user clicks outside of it</description>
-                <returnType type="Boolean" />
-            </property>
+            <propertyGroup caption="Style">
+                <property key="tagType" type="enumeration" defaultValue="TEXT">
+                    <caption>Tag type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="TEXT">Text</enumerationValue>
+                        <enumerationValue key="CUSTOM">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="tagText" type="textTemplate" required="true">
+                    <caption>Tag text</caption>
+                    <description />
+                </property>
+                <property key="tagContent" type="widgets" required="true">
+                    <caption>Tag content</caption>
+                    <description />
+                </property>
+                <property key="menuContent" type="widgets" required="true">
+                    <caption>Menu content</caption>
+                    <description />
+                </property>
+                <property key="screenSide" type="enumeration" defaultValue="RIGHT">
+                    <caption>Screen side</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="TOP">Top</enumerationValue>
+                        <enumerationValue key="RIGHT">Right</enumerationValue>
+                        <enumerationValue key="BOTTOM">Bottom</enumerationValue>
+                        <enumerationValue key="LEFT">Left</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="menuGirth" type="expression" defaultValue="'40rem'">
+                    <caption>Menu girth</caption>
+                    <description>CSS value of the menu's width for Screen Side Left or Right and menu's height for Screen Side Top or Bottom.</description>
+                    <returnType type="String" />
+                </property>
+                <property key="center" type="boolean" defaultValue="true">
+                    <caption>Center?</caption>
+                    <description>Centers the tag in the screen</description>
+                </property>
+                <property key="tagOffset" type="expression" defaultValue="'20rem'">
+                    <caption>Tag offset</caption>
+                    <description>CSS value offset. For Screen Side Left or Right, it is offset from the top of the screen. For Screen Side Top or Bottom, it is the offset from the left of the screen.</description>
+                    <returnType type="String" />
+                </property>
+
+            </propertyGroup>
+            <propertyGroup caption="Customization">
+                <property key="closeClickOutside" type="expression" defaultValue="true">
+                    <caption>Close on click outside?</caption>
+                    <description>Collapses the menu when the user clicks outside of it</description>
+                    <returnType type="Boolean" />
+                </property>
+                <property key="debugMode" type="boolean" defaultValue="false">
+                    <caption>Debug mode</caption>
+                    <description>Log widget actions to the console</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Attribute">
+                <property key="pageName" type="attribute" required="false" onChange="onChange">
+                    <caption>Page name</caption>
+                    <description>(Optional) String attribute the holds the name of the current page. By default, it is updated whenever the user clicks outside of the menu.</description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="intervalOffset" type="integer" defaultValue="0">
+                    <caption>Interval offset (ms)</caption>
+                    <description>Time between each check if the page changed. When set to 0, there is no polling.</description>
+                </property>
+            </propertyGroup>
+
+
+        </propertyGroup>
+
+        <propertyGroup caption="Events">
+            <propertyGroup caption="Events">
+                <property key="onTabClick" type="action">
+                    <caption>On tab click</caption>
+                    <description></description>
+                </property>
+                <property key="onClickOutside" type="action">
+                    <caption>On click outside</caption>
+                    <description></description>
+                </property>
+                <property key="onChange" type="action">
+                    <caption>On change</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Common">
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"></systemProperty>
+                <systemProperty key="TabIndex"></systemProperty>
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility"></systemProperty>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>

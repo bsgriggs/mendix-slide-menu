@@ -6,22 +6,29 @@
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
-export type ScreenSideEnum = "LEFT" | "RIGHT";
+export type TagTypeEnum = "TEXT" | "CUSTOM";
+
+export type ScreenSideEnum = "TOP" | "RIGHT" | "BOTTOM" | "LEFT";
 
 export interface SlideMenuContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    tabContent: ReactNode;
+    tagType: TagTypeEnum;
+    tagText: DynamicValue<string>;
+    tagContent: ReactNode;
     menuContent: ReactNode;
     screenSide: ScreenSideEnum;
-    pageName?: EditableValue<string>;
+    menuGirth: DynamicValue<string>;
     center: boolean;
-    topOffset: DynamicValue<string>;
-    menuWidth: DynamicValue<string>;
-    onTabClick?: ActionValue;
+    tagOffset: DynamicValue<string>;
     closeClickOutside: DynamicValue<boolean>;
+    debugMode: boolean;
+    pageName?: EditableValue<string>;
+    intervalOffset: number;
+    onTabClick?: ActionValue;
+    onClickOutside?: ActionValue;
 }
 
 export interface SlideMenuPreviewProps {
@@ -29,13 +36,19 @@ export interface SlideMenuPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
-    tabContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    tagType: TagTypeEnum;
+    tagText: string;
+    tagContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     menuContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     screenSide: ScreenSideEnum;
-    pageName: string;
+    menuGirth: string;
     center: boolean;
-    topOffset: string;
-    menuWidth: string;
-    onTabClick: {} | null;
+    tagOffset: string;
     closeClickOutside: string;
+    debugMode: boolean;
+    pageName: string;
+    intervalOffset: number | null;
+    onTabClick: {} | null;
+    onClickOutside: {} | null;
+    onChange: {} | null;
 }

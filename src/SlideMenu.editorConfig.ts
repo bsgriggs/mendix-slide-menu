@@ -106,26 +106,32 @@ export function getProperties(
     // target: Platform
 ): Properties {
     if (_values.center) {
-        hidePropertyIn(defaultProperties, _values, "topOffset");
+        hidePropertyIn(defaultProperties, _values, "tagOffset");
+    }
+    if (_values.pageName.trim() === "") {
+        hidePropertyIn(defaultProperties, _values, "intervalOffset");
+    }
+    if (_values.tagType === "TEXT") {
+        hidePropertyIn(defaultProperties, _values, "tagContent");
+    } else {
+        hidePropertyIn(defaultProperties, _values, "tagText");
     }
 
     return defaultProperties;
 }
 
-// export function check(_values: SlideMenuPreviewProps): Problem[] {
-//     const errors: Problem[] = [];
-//     // Add errors to the above array to throw errors in Studio and Studio Pro.
-//     /* Example
-//     if (values.myProperty !== "custom") {
-//         errors.push({
-//             property: `myProperty`,
-//             message: `The value of 'myProperty' is different of 'custom'.`,
-//             url: "https://github.com/myrepo/mywidget"
-//         });
-//     }
-//     */
-//     return errors;
-// }
+export function check(_values: SlideMenuPreviewProps): Problem[] {
+    const errors: Problem[] = [];
+    // Add errors to the above array to throw errors in Studio and Studio Pro.
+    if (_values.intervalOffset === null || _values.intervalOffset < 0) {
+        errors.push({
+            property: `intervalOffset`,
+            message: `Interval offset should be >= 0`,
+            url: "https://github.com/bsgriggs/mendix-slide-menu"
+        });
+    }
+    return errors;
+}
 
 // export function getPreview(values: SlideMenuPreviewProps, isDarkMode: boolean, version: number[]): PreviewProps {
 //     // Customize your pluggable widget appearance for Studio Pro.
