@@ -11,11 +11,14 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
     const [showMenu, setShowMenu] = React.useState<boolean>(false);
     const menuRef = React.useRef<HTMLDivElement>(null);
 
-    const debugLog = React.useCallback((message?: any, ...optionalParams: any[]) => {
-        if (props.debugMode) {
-            console.log(message, ...optionalParams);
-        }
-    }, []);
+    const debugLog = React.useCallback(
+        (message?: any, ...optionalParams: any[]) => {
+            if (props.debugMode) {
+                console.log(message, ...optionalParams);
+            }
+        },
+        [props.debugMode]
+    );
 
     const updatePageName = React.useCallback(() => {
         const newPageName = MxPageName();
@@ -23,17 +26,20 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
             debugLog("updatePageName", `changing page name from '${props.pageName?.value}' to '${newPageName}'`);
             props.pageName?.setValue(newPageName);
         }
-    }, [props.pageName]);
+    }, [props.pageName, debugLog]);
 
-    const callMxAction = React.useCallback((mxAction: ActionValue | undefined, actionName: string) => {
-        if (mxAction) {
-            if (mxAction.canExecute) {
-                mxAction.execute();
-            } else {
-                debugLog("callMxAction", `user does not have permission to call action '${actionName}'`);
+    const callMxAction = React.useCallback(
+        (mxAction: ActionValue | undefined, actionName: string) => {
+            if (mxAction) {
+                if (mxAction.canExecute) {
+                    mxAction.execute();
+                } else {
+                    debugLog("callMxAction", `user does not have permission to call action '${actionName}'`);
+                }
             }
-        }
-    }, []);
+        },
+        [debugLog]
+    );
 
     const onClickHandler = (): void => {
         setShowMenu(!showMenu);
@@ -51,7 +57,7 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
         callMxAction(props.onClickOutside, "onClickOutside");
     });
 
-    //polling to check the page name
+    // polling to check the page name
     React.useEffect(() => {
         if (props.pageName && props.intervalOffset > 0) {
             const interval = setInterval(() => {
@@ -60,7 +66,7 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
             }, props.intervalOffset);
             return () => clearInterval(interval);
         }
-    }, [props.pageName]);
+    }, [props.pageName, debugLog, props.intervalOffset, updatePageName]);
 
     debugLog("props", props);
 
