@@ -1,5 +1,5 @@
 import { SlideMenuPreviewProps } from "../typings/SlideMenuProps";
-import { hidePropertyIn } from "@mendix/pluggable-widgets-tools";
+import { hidePropertiesIn, hidePropertyIn } from "@mendix/pluggable-widgets-tools";
 
 export type Platform = "web" | "desktop";
 
@@ -112,9 +112,13 @@ export function getProperties(
         hidePropertyIn(defaultProperties, _values, "intervalOffset");
     }
     if (_values.tagType === "TEXT") {
-        hidePropertyIn(defaultProperties, _values, "tagContent");
+        hidePropertiesIn(defaultProperties, _values, ["tagContent", "tagAriaLabel"]);
     } else {
         hidePropertyIn(defaultProperties, _values, "tagText");
+    }
+
+    if (_values.pageName.trim() === "") {
+        hidePropertyIn(defaultProperties, _values, "onChange");
     }
 
     return defaultProperties;

@@ -1,2 +1,126 @@
-.side-menu {
+$border-radius: 4px;
+$border: 1px solid #e7e7e9;
+
+.slide-menu {
+    .tag {
+        position: fixed;
+        z-index: 98;
+        span {
+            white-space: nowrap;
+        }
+    }
+    .menu {
+        padding: 1em;
+        position: fixed;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 99;
+    }
+    &.top {
+        .tag,
+        .menu {
+            transition: top 0.5s;
+            border-radius: 0 0 $border-radius $border-radius;
+            border-left: $border;
+            border-bottom: $border;
+            border-right: $border;
+        }
+        .tag {
+            transform-origin: top left;
+        }
+        .menu {
+            left: 0;
+        }
+        &.center {
+            .tag {
+                transform: translateX(-50%);
+            }
+        }
+    }
+    &.right {
+        .tag,
+        .menu {
+            transition: right 0.5s;
+        }
+        .tag {
+            transform-origin: top right;
+            border-radius: 0 0 $border-radius $border-radius;
+            border-left: $border;
+            border-bottom: $border;
+            border-right: $border;
+        }
+        .menu {
+            top: 0;
+            border-radius: $border-radius 0 0 $border-radius;
+            border-left: $border;
+            border-bottom: $border;
+            border-top: $border;
+        }
+        &.center {
+            .tag {
+                transform: rotate(90deg) translateX(50%) translateY(-2px);
+            }
+        }
+        &:not(.center) {
+            .tag {
+                transform: rotate(90deg) translateX(100%) translateY(-2px);
+            }
+        }
+    }
+    &.bottom {
+        .tag,
+        .menu {
+            transition: bottom 0.5s;
+            border-radius: $border-radius $border-radius 0 0;
+            border-left: $border;
+            border-top: $border;
+            border-right: $border;
+        }
+        .tag {
+            transform-origin: bottom left;
+        }
+        .menu {
+            left: 0;
+        }
+        &.center {
+            .tag {
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    &.left {
+        .tag,
+        .menu {
+            transition: left 0.5s;
+        }
+        .tag {
+            transform-origin: top left;
+            border-radius: 0 0 $border-radius $border-radius;
+            border-left: $border;
+            border-bottom: $border;
+            border-right: $border;
+        }
+        .menu {
+            top: 0;
+            border-radius: 0 $border-radius $border-radius 0;
+            border-top: $border;
+            border-bottom: $border;
+            border-right: $border;
+        }
+        &.center {
+            .tag {
+                transform: rotate(-90deg) translateX(-50%) translateY(-2px);
+            }
+        }
+        &:not(.center) {
+            .tag {
+                transform: rotate(-90deg) translateX(-100%) translateY(-2px);
+            }
+        }
+    }
+
+    .widget-gallery-items {
+        max-height: unset !important;
+    }
 }

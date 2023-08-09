@@ -20,7 +20,7 @@ export interface SlideMenuContainerProps {
     tagContent: ReactNode;
     menuContent: ReactNode;
     screenSide: ScreenSideEnum;
-    menuGirth: DynamicValue<string>;
+    menuLength: DynamicValue<string>;
     center: boolean;
     tagOffset: DynamicValue<string>;
     closeClickOutside: DynamicValue<boolean>;
@@ -29,6 +29,7 @@ export interface SlideMenuContainerProps {
     intervalOffset: number;
     onTabClick?: ActionValue;
     onClickOutside?: ActionValue;
+    tagAriaLabel?: DynamicValue<string>;
 }
 
 export interface SlideMenuPreviewProps {
@@ -41,7 +42,7 @@ export interface SlideMenuPreviewProps {
     tagContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     menuContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     screenSide: ScreenSideEnum;
-    menuGirth: string;
+    menuLength: string;
     center: boolean;
     tagOffset: string;
     closeClickOutside: string;
@@ -51,4 +52,5 @@ export interface SlideMenuPreviewProps {
     onTabClick: {} | null;
     onClickOutside: {} | null;
     onChange: {} | null;
+    tagAriaLabel: string;
 }

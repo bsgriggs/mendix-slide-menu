@@ -90,7 +90,7 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
                                 : props.tagOffset.value
                             : props.screenSide === "TOP"
                             ? showMenu
-                                ? (props.menuGirth.value as string)
+                                ? (props.menuLength.value as string)
                                 : 0
                             : undefined,
                     left:
@@ -100,16 +100,17 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
                                 : props.tagOffset.value
                             : props.screenSide === "LEFT"
                             ? showMenu
-                                ? (props.menuGirth.value as string)
+                                ? (props.menuLength.value as string)
                                 : 0
                             : undefined,
                     right:
-                        props.screenSide === "RIGHT" ? (showMenu ? (props.menuGirth.value as string) : 0) : undefined,
+                        props.screenSide === "RIGHT" ? (showMenu ? (props.menuLength.value as string) : 0) : undefined,
                     bottom:
-                        props.screenSide === "BOTTOM" ? (showMenu ? (props.menuGirth.value as string) : 0) : undefined
+                        props.screenSide === "BOTTOM" ? (showMenu ? (props.menuLength.value as string) : 0) : undefined
                 }}
                 tabIndex={props.tabIndex || 0}
                 onClick={onClickHandler}
+                aria-label={props.tagType === "TEXT" ? props.tagText.value : props.tagAriaLabel?.value}
             >
                 {props.tagType === "TEXT" ? props.tagText.value : props.tagContent}
             </button>
@@ -119,28 +120,36 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
                 style={{
                     width:
                         props.screenSide === "RIGHT" || props.screenSide === "LEFT"
-                            ? (props.menuGirth.value as string)
+                            ? (props.menuLength.value as string)
                             : "100vw",
                     height:
                         props.screenSide === "TOP" || props.screenSide === "BOTTOM"
-                            ? (props.menuGirth.value as string)
+                            ? (props.menuLength.value as string)
                             : "100vh",
                     top:
-                        props.screenSide === "TOP" ? (showMenu ? 0 : `-${props.menuGirth.value as string}`) : undefined,
+                        props.screenSide === "TOP"
+                            ? showMenu
+                                ? 0
+                                : `-${props.menuLength.value as string}`
+                            : undefined,
                     right:
                         props.screenSide === "RIGHT"
                             ? showMenu
                                 ? 0
-                                : `-${props.menuGirth.value as string}`
+                                : `-${props.menuLength.value as string}`
                             : undefined,
                     bottom:
                         props.screenSide === "BOTTOM"
                             ? showMenu
                                 ? 0
-                                : `-${props.menuGirth.value as string}`
+                                : `-${props.menuLength.value as string}`
                             : undefined,
                     left:
-                        props.screenSide === "LEFT" ? (showMenu ? 0 : `-${props.menuGirth.value as string}`) : undefined
+                        props.screenSide === "LEFT"
+                            ? showMenu
+                                ? 0
+                                : `-${props.menuLength.value as string}`
+                            : undefined
                 }}
             >
                 {props.menuContent}

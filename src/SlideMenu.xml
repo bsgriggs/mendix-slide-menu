@@ -45,18 +45,18 @@
                         <enumerationValue key="LEFT">Left</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="menuGirth" type="expression" defaultValue="'40rem'">
-                    <caption>Menu girth</caption>
-                    <description>CSS value of the menu's width for Screen Side Left or Right and menu's height for Screen Side Top or Bottom.</description>
+                <property key="menuLength" type="expression" defaultValue="'30%'">
+                    <caption>Menu length</caption>
+                    <description>CSS width for Screen Side Left or Right and height for Screen Side Top or Bottom.</description>
                     <returnType type="String" />
                 </property>
                 <property key="center" type="boolean" defaultValue="true">
                     <caption>Center?</caption>
                     <description>Centers the tag in the screen</description>
                 </property>
-                <property key="tagOffset" type="expression" defaultValue="'20rem'">
+                <property key="tagOffset" type="expression" defaultValue="'10%'">
                     <caption>Tag offset</caption>
-                    <description>CSS value offset. For Screen Side Left or Right, it is offset from the top of the screen. For Screen Side Top or Bottom, it is the offset from the left of the screen.</description>
+                    <description>CSS length from the top of the screen for Screen Side Left or Right. For Screen Side Top or Bottom, it is the length from the left of the screen.</description>
                     <returnType type="String" />
                 </property>
 
@@ -101,6 +101,15 @@
                 </property>
                 <property key="onChange" type="action">
                     <caption>On change</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Accessibility">
+            <propertyGroup caption="Accessibility">
+                <property key="tagAriaLabel" type="textTemplate"
+                    required="false">
+                    <caption>Tag aria label</caption>
                     <description></description>
                 </property>
             </propertyGroup>
