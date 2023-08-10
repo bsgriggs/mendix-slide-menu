@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget
+    id="mendix.slidemenu.SlideMenu"
+    pluginWidget="true"
+    needsEntityContext="true"
+    offlineCapable="true"
+    supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd"
+>
+    <name>Slide Menu</name>
+    <description>My widget description</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Style">
+                <property key="tagType" type="enumeration" defaultValue="TEXT">
+                    <caption>Tag type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="TEXT">Text</enumerationValue>
+                        <enumerationValue key="CUSTOM">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="tagText" type="textTemplate" required="true">
+                    <caption>Tag text</caption>
+                    <description />
+                </property>
+                <property key="tagContent" type="widgets" required="true">
+                    <caption>Tag content</caption>
+                    <description />
+                </property>
+                <property key="menuContent" type="widgets" required="true">
+                    <caption>Menu content</caption>
+                    <description />
+                </property>
+                <property key="screenSide" type="enumeration" defaultValue="RIGHT">
+                    <caption>Screen side</caption>
+                    <description>Determines which side of the screen the tag is fixed on.</description>
+                    <enumerationValues>
+                        <enumerationValue key="TOP">Top</enumerationValue>
+                        <enumerationValue key="RIGHT">Right</enumerationValue>
+                        <enumerationValue key="BOTTOM">Bottom</enumerationValue>
+                        <enumerationValue key="LEFT">Left</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="menuLength" type="expression" defaultValue="'30%'">
+                    <caption>Menu length</caption>
+                    <description>CSS width for Screen Side Left or Right and height for Screen Side Top or Bottom.</description>
+                    <returnType type="String" />
+                </property>
+                <property key="center" type="boolean" defaultValue="true">
+                    <caption>Center?</caption>
+                    <description>Centers the tag in the screen.</description>
+                </property>
+                <property key="tagOffset" type="expression" defaultValue="'10%'">
+                    <caption>Tag offset</caption>
+                    <description>CSS length from the top of the screen for Screen Side Left or Right. For Screen Side Top or Bottom, it is the length from the left of the screen.</description>
+                    <returnType type="String" />
+                </property>
+
+            </propertyGroup>
+            <propertyGroup caption="Customization">
+                <property key="closeClickOutside" type="expression" defaultValue="true">
+                    <caption>Close on click outside?</caption>
+                    <description>Collapses the menu when the user clicks outside of the menu.</description>
+                    <returnType type="Boolean" />
+                </property>
+                <property key="debugMode" type="boolean" defaultValue="false">
+                    <caption>Debug mode</caption>
+                    <description>Logs widget actions to the console.</description>
+                </property>
+                <property key="usePortal" type="boolean" defaultValue="true">
+                    <caption>Use portal?</caption>
+                    <description>The widget's content will be put at the end of the DOM instead of where the widget is on the page.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Attribute">
+                <property key="pageName" type="attribute" required="false" onChange="onChange">
+                    <caption>Page name</caption>
+                    <description>(Optional) String attribute the holds the name of the current page. By default, it is updated whenever the user clicks outside of the menu.</description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="intervalOffset" type="integer" defaultValue="0">
+                    <caption>Interval offset (ms)</caption>
+                    <description>Time between each check if the page changed. When set to 0, there is no polling.</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <propertyGroup caption="Events">
+                <property key="onTabClick" type="action">
+                    <caption>On tab click</caption>
+                    <description></description>
+                </property>
+                <property key="onClickOutside" type="action">
+                    <caption>On click outside</caption>
+                    <description></description>
+                </property>
+                <property key="onChange" type="action">
+                    <caption>On change</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Accessibility">
+            <propertyGroup caption="Accessibility">
+                <property key="tagAriaLabel" type="textTemplate"
+                    required="false">
+                    <caption>Tag aria label</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Common">
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"></systemProperty>
+                <systemProperty key="TabIndex"></systemProperty>
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility"></systemProperty>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
