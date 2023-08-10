@@ -37,7 +37,7 @@
                 </property>
                 <property key="screenSide" type="enumeration" defaultValue="RIGHT">
                     <caption>Screen side</caption>
-                    <description />
+                    <description>Determines which side of the screen the tag is fixed on.</description>
                     <enumerationValues>
                         <enumerationValue key="TOP">Top</enumerationValue>
                         <enumerationValue key="RIGHT">Right</enumerationValue>
@@ -52,7 +52,7 @@
                 </property>
                 <property key="center" type="boolean" defaultValue="true">
                     <caption>Center?</caption>
-                    <description>Centers the tag in the screen</description>
+                    <description>Centers the tag in the screen.</description>
                 </property>
                 <property key="tagOffset" type="expression" defaultValue="'10%'">
                     <caption>Tag offset</caption>
@@ -64,12 +64,16 @@
             <propertyGroup caption="Customization">
                 <property key="closeClickOutside" type="expression" defaultValue="true">
                     <caption>Close on click outside?</caption>
-                    <description>Collapses the menu when the user clicks outside of it</description>
+                    <description>Collapses the menu when the user clicks outside of the menu.</description>
                     <returnType type="Boolean" />
                 </property>
                 <property key="debugMode" type="boolean" defaultValue="false">
                     <caption>Debug mode</caption>
-                    <description>Log widget actions to the console</description>
+                    <description>Logs widget actions to the console.</description>
+                </property>
+                <property key="usePortal" type="boolean" defaultValue="true">
+                    <caption>Use portal?</caption>
+                    <description>The widget's content will be put at the end of the DOM instead of where the widget is on the page.</description>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Attribute">
@@ -85,10 +89,7 @@
                     <description>Time between each check if the page changed. When set to 0, there is no polling.</description>
                 </property>
             </propertyGroup>
-
-
         </propertyGroup>
-
         <propertyGroup caption="Events">
             <propertyGroup caption="Events">
                 <property key="onTabClick" type="action">

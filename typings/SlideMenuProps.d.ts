@@ -25,6 +25,7 @@ export interface SlideMenuContainerProps {
     tagOffset: DynamicValue<string>;
     closeClickOutside: DynamicValue<boolean>;
     debugMode: boolean;
+    usePortal: boolean;
     pageName?: EditableValue<string>;
     intervalOffset: number;
     onTabClick?: ActionValue;
@@ -47,6 +48,7 @@ export interface SlideMenuPreviewProps {
     tagOffset: string;
     closeClickOutside: string;
     debugMode: boolean;
+    usePortal: boolean;
     pageName: string;
     intervalOffset: number | null;
     onTabClick: {} | null;
