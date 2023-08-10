@@ -10,7 +10,7 @@
     xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd"
 >
     <name>Slide Menu</name>
-    <description>My widget description</description>
+    <description>Widget that allows you to put content in a section on any side of the screen. The user can click a button to expand/collapse the content.</description>
     <icon />
     <properties>
         <propertyGroup caption="General">
