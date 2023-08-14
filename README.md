@@ -28,16 +28,18 @@ Using the Tag Type "Custom" will add the Aria Label option to the widget setting
 **Screen side** - Determines which side of the screen the tag is fixed on.  
 **Menu length** - String expression that is expected to be a valid CSS length. For screen sides **Left or Right**, this is the menu's **Width**. For screen sides **Top or Bottom**, this is the menu's **Height**.  
 **Center?** - When enabled, the tag is fixed to the center of the side of the screen.  
-**Tag offset** - Only available if Center is set to No. Otherwise, it is an expression that is expected to be a valid CSS length. For screen sides **Left or Right**, this is the distance from the **Top** of the screen. For screen sides **Top or Bottom**, this is the distance from the **Left** of the screen.  
+**Tag offset** - Only available if Center is set to No. Otherwise, it is an expression expected to be a valid CSS length. For screen sides **Left or Right**, this is the distance from the **Top** of the screen. For screen sides **Top or Bottom**, this is the distance from the **Left** of the screen.  
 
 #### Customization  
-**Close on click outside** - 
-**Debug mode** - 
-**Use portal** - 
+**Close on click outside** - Boolean expression that determines if the menu should automatically close when the user clicks outside of the menu  
+**Debug mode** - Enables the widget's actions being logged to the browser console  
+**Use portal** - When enabled, the widget's content will be rooted at the end of the body tag. When disabled, the widget's content will be rooted where it appears on the page in Studio Pro. 
+- If the menu is describing something specific on the page (i.e. a list view with search criteria in the slide menu), accessibility requirements say the widget should be near the content it describes.
+- If the menu is not describing something specific on the page (i.e. the menu shows the current user's account information, it is okay to leave the menu content rendering directly in the body DOM.  
 
 
 #### Attributes  
-**Page name** - 
+**Page name** - String attribute that will be set with the name of the current page. This value can then be used to make content specific to a page (details below).
 **Interval offset** - 
 
 ### Events
