@@ -28,7 +28,7 @@ export interface SlideMenuContainerProps {
     usePortal: boolean;
     pageName?: EditableValue<string>;
     intervalOffset: number;
-    onTabClick?: ActionValue;
+    onTagClick?: ActionValue;
     onClickOutside?: ActionValue;
     tagAriaLabel?: DynamicValue<string>;
 }
@@ -51,7 +51,7 @@ export interface SlideMenuPreviewProps {
     usePortal: boolean;
     pageName: string;
     intervalOffset: number | null;
-    onTabClick: {} | null;
+    onTagClick: {} | null;
     onClickOutside: {} | null;
     onChange: {} | null;
     tagAriaLabel: string;

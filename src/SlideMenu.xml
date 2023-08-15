@@ -92,17 +92,17 @@
         </propertyGroup>
         <propertyGroup caption="Events">
             <propertyGroup caption="Events">
-                <property key="onTabClick" type="action">
-                    <caption>On tab click</caption>
-                    <description></description>
+                <property key="onTagClick" type="action">
+                    <caption>On tag click</caption>
+                    <description>Action triggered when the user clicks on the button to expand or collapse the menu.</description>
                 </property>
                 <property key="onClickOutside" type="action">
                     <caption>On click outside</caption>
-                    <description></description>
+                    <description>Action triggered when the user clicks on anything outside the menu (including the tag button).</description>
                 </property>
                 <property key="onChange" type="action">
                     <caption>On change</caption>
-                    <description></description>
+                    <description>Action triggered when the Page Name attribute's value changes.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
