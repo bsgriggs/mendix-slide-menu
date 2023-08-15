@@ -8,7 +8,7 @@ It is a React-based replacement for the Dojo-based [Slide in Slide out ](https:/
 | ![closed](https://github.com/bsgriggs/mendix-slide-menu/blob/media/demoClosed.png)   | ![open](https://github.com/bsgriggs/mendix-slide-menu/blob/media/demoOpen.png)  |  
 
 ## Features
-- Show or hide content on the side of the screen
+- Show or hide content on any side of the screen
 - Ability to have the widget set a string attribute to be the name of the current page ~ useful for page-dependent FAQs
 - Option to have the menu automatically close when the user clicks away
 - Option to either have the menu's DOM at the very end of the body or where the menu would be in the page structure
