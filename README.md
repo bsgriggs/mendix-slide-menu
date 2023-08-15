@@ -15,7 +15,7 @@ It is a React-based replacement for the Dojo-based [Slide in Slide out ](https:/
 
 ## Usage
 ### General settings
-![generalPageName](https://github.com/bsgriggs/mendix-slide-menu/blob/media/generalPageName.png)  
+![general](https://github.com/bsgriggs/mendix-slide-menu/blob/media/general.png)  
 #### Style
 **Tag type** - Determines the content of the button that opens the menu
 
@@ -39,7 +39,7 @@ Using the Tag Type "Custom" will add the Aria Label option to the widget setting
 
 
 #### Attributes  
-**Page name** - String attribute that will be set with the name of the current page. This value can then be used to make content specific to a page (details below).
+**Page name** - String attribute that will be set with the name of the current page. This value can then be used to make content specific to a page (details in the 'How to use the Page Name to make a Page-Based FAQ Menu' section below).
 **Interval offset** - 
 
 ### Events
@@ -49,9 +49,27 @@ Using the Tag Type "Custom" will add the Aria Label option to the widget setting
 **On change** - Action triggered when the Page Name attribute's value changes.
 
 ## How to use the Page Name to make a Page-Based FAQ Menu
-![generalPageName](https://github.com/bsgriggs/mendix-slide-menu/blob/media/generalPageName.png)  
+For this example, we will use the following persistent data structure.  
+![domainMain](https://github.com/bsgriggs/mendix-slide-menu/blob/media/domainMain.png)  
+The Page entity stores the value from the Page Name attribute on the widget. Then you can have any number of objects that are associated and store information about that page.  
 
+You will also need a non-persistent page helper.  
+![domainHelper](https://github.com/bsgriggs/mendix-slide-menu/blob/media/domainHelper.png)   
 
+Create a Microflow/Nanoflow that creates this helper and returns it.  
+![DS_Helper](https://github.com/bsgriggs/mendix-slide-menu/blob/media/DS_Helper.png)  
+
+Inside a snippet on your project's main layout (so the widget appears on all pages), add a data view that calls the above Microflow/Nanoflow. Inside the data view, add the Slide Menu widget and set the Page Name property to SlideMenuHelper -> PageName. Inside the content of the Slide Menu, add a List View or Gallery that retrieves by the Page Name.  
+![pageFAQ](https://github.com/bsgriggs/mendix-slide-menu/blob/media/pageFAQ.png)  
+*Note: the content above the Gallery widget is from using Tag Type = 'Custom' and is not required*
+
+Now when you run the project, you should see the Slide Menu appearing on all pages but it has no data. Add a button inside the Slide Menu's content so admins can create FAQs directly on the page they're on.  
+The button should call a Microflow similar to the following that checks if there is already a Page object in the database with the page name and create a new FAQ object associated with that page.  
+![ACT_FAQ_New](https://github.com/bsgriggs/mendix-slide-menu/blob/media/ACT_FAQ_New.png)  
+*Below is the sub-Microflow*  
+![SUB_Page_CreateRetrieve](https://github.com/bsgriggs/mendix-slide-menu/blob/media/SUB_Page_CreateRetrieve.png)  
+
+The most performant option is to have 'Close on click outside?' set to true and 'Interval offset (ms)' set to 0. This makes it so the slide menu closes when the user tries to change pages and the page name will update when the click on the tag to re-open the menu. If you do not want the menu to close when the user changes pages, then set 'Close on click outside?' set to false and 'Interval offset (ms)' set to 1000 or more.
 
 
 ## Demo project
