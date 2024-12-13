@@ -1,4 +1,4 @@
-import React, { createElement } from "react";
+import React, { createElement, useEffect } from "react";
 import classNames from "classnames";
 import MxPageName from "../utils/MxPageName";
 import useOnClickOutside from "../utils/useOnClickOutside";
@@ -18,6 +18,7 @@ interface MenuProps {
     center: boolean;
     tagOffset: string;
     closeClickOutside: boolean;
+    openOverride: boolean | undefined;
     debugMode: boolean;
     pageName?: EditableValue<string>;
     intervalOffset: number;
@@ -86,6 +87,15 @@ const Menu = (props: MenuProps): React.ReactElement => {
             return () => clearInterval(interval);
         }
     }, [props.pageName, debugLog, props.intervalOffset, updatePageName]);
+
+    useEffect(() => {
+        debugLog("open override useEffect, new value:", props.openOverride);
+        if (props.openOverride !== undefined) {
+            setShowMenu(props.openOverride);
+        } else {
+            setShowMenu(false);
+        }
+    }, [props.openOverride]);
 
     debugLog("props", props);
 

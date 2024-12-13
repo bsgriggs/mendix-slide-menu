@@ -1,7 +1,7 @@
 /**
  * This file was generated from SlideMenu.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix UI Content Team
+ * @author Mendix Widgets Framework Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
@@ -24,6 +24,7 @@ export interface SlideMenuContainerProps {
     center: boolean;
     tagOffset: DynamicValue<string>;
     closeClickOutside: DynamicValue<boolean>;
+    openOverride?: DynamicValue<boolean>;
     debugMode: boolean;
     usePortal: boolean;
     pageName?: EditableValue<string>;
@@ -34,19 +35,24 @@ export interface SlideMenuContainerProps {
 }
 
 export interface SlideMenuPreviewProps {
+    /**
+     * @deprecated Deprecated since version 9.18.0. Please use class property instead.
+     */
     className: string;
+    class: string;
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
     tagType: TagTypeEnum;
     tagText: string;
-    tagContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
-    menuContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    tagContent: { widgetCount: number; renderer: ComponentType<{ children: ReactNode; caption?: string }> };
+    menuContent: { widgetCount: number; renderer: ComponentType<{ children: ReactNode; caption?: string }> };
     screenSide: ScreenSideEnum;
     menuLength: string;
     center: boolean;
     tagOffset: string;
     closeClickOutside: string;
+    openOverride: string;
     debugMode: boolean;
     usePortal: boolean;
     pageName: string;

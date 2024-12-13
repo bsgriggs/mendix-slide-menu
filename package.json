@@ -1,17 +1,17 @@
 {
   "name": "slidemenu",
   "widgetName": "SlideMenu",
-  "version": "1.0.0",
-  "description": "My widget description",
+  "version": "2.0.0",
+  "description": "Widget that allows you to put content in a section on any side of the screen. The user can click a button to expand/collapse the content",
   "copyright": "Benjamin Griggs",
   "author": "Benjamin Griggs",
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "license": "MIT",
   "config": {
     "projectPath": "../../",
-    "mendixHost": "http://localhost:8080",
+    "mendixHost": "http://localhost:8082",
     "developmentPort": 3000
   },
   "packagePath": "mendix",
@@ -25,11 +25,25 @@
     "release": "pluggable-widgets-tools release:web"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "~9.13.0",
+    "@mendix/pluggable-widgets-tools": "~9.24.0",
     "@types/big.js": "^6.0.2"
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "sass": "^1.64.2"
+    "sass": "^1.82.0"
+  },
+  "resolutions": {
+    "react": "18.2.0",
+    "react-native": "0.72.7",
+    "react-dom": "18.2.0",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0"
+  },
+  "overrides": {
+    "react": "18.2.0",
+    "react-native": "0.72.7",
+    "react-dom": "18.2.0",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0"
   }
 }
