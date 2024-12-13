@@ -11,22 +11,26 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
                 {...props}
                 tagText={props.tagText.value as string}
                 closeClickOutside={props.closeClickOutside.value as boolean}
+                closeTabOutside={props.closeTabOutside.value as boolean}
                 openOverride={props.openOverride?.value}
-                tagAriaLabel={props.tagAriaLabel?.value as string}
                 menuLength={props.menuLength.value as string}
                 tagOffset={props.tagOffset.value as string}
+                tagAriaLabel={props.tagAriaLabel?.value}
+                modalAriaLabel={props.modalAriaLabel?.value}
             />,
-            document.body
+            document.getElementById("content") || document.body
         )
     ) : (
         <Menu
             {...props}
             tagText={props.tagText.value as string}
             closeClickOutside={props.closeClickOutside.value as boolean}
+            closeTabOutside={props.closeTabOutside.value as boolean}
             openOverride={props.openOverride?.value}
-            tagAriaLabel={props.tagAriaLabel?.value as string}
             menuLength={props.menuLength.value as string}
             tagOffset={props.tagOffset.value as string}
+            tagAriaLabel={props.tagAriaLabel?.value}
+            modalAriaLabel={props.modalAriaLabel?.value}
         />
     );
 }

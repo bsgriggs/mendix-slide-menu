@@ -24,6 +24,7 @@ export interface SlideMenuContainerProps {
     center: boolean;
     tagOffset: DynamicValue<string>;
     closeClickOutside: DynamicValue<boolean>;
+    closeTabOutside: DynamicValue<boolean>;
     openOverride?: DynamicValue<boolean>;
     debugMode: boolean;
     usePortal: boolean;
@@ -32,6 +33,7 @@ export interface SlideMenuContainerProps {
     onTagClick?: ActionValue;
     onClickOutside?: ActionValue;
     tagAriaLabel?: DynamicValue<string>;
+    modalAriaLabel?: DynamicValue<string>;
 }
 
 export interface SlideMenuPreviewProps {
@@ -52,6 +54,7 @@ export interface SlideMenuPreviewProps {
     center: boolean;
     tagOffset: string;
     closeClickOutside: string;
+    closeTabOutside: string;
     openOverride: string;
     debugMode: boolean;
     usePortal: boolean;
@@ -61,4 +64,5 @@ export interface SlideMenuPreviewProps {
     onClickOutside: {} | null;
     onChange: {} | null;
     tagAriaLabel: string;
+    modalAriaLabel: string;
 }

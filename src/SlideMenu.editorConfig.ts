@@ -112,7 +112,7 @@ export function getProperties(
         hidePropertyIn(defaultProperties, _values, "intervalOffset");
     }
     if (_values.tagType === "TEXT") {
-        hidePropertiesIn(defaultProperties, _values, ["tagContent", "tagAriaLabel"]);
+        hidePropertiesIn(defaultProperties, _values, ["tagContent"]);
     } else {
         hidePropertyIn(defaultProperties, _values, "tagText");
     }

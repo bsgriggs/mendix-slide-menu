@@ -11,6 +11,7 @@
 >
     <name>Slide Menu</name>
     <description>Widget that allows you to put content in a section on any side of the screen. The user can click a button to expand/collapse the content.</description>
+    <helpUrl>https://github.com/bsgriggs/mendix-slide-menu/blob/master/README.md</helpUrl>
     <icon />
     <properties>
         <propertyGroup caption="General">
@@ -46,7 +47,7 @@
             </property>
             <property key="menuLength" type="expression" defaultValue="'30%'">
                 <caption>Menu length</caption>
-                <description>CSS width for Screen Side Left or Right and height for Screen Side Top or Bottom.</description>
+                <description>CSS width for Screen Side Left or Right and height for Screen Side Top or Bottom (i.e. '30%', '10rem').</description>
                 <returnType type="String" />
             </property>
             <property key="center" type="boolean" defaultValue="true">
@@ -66,9 +67,14 @@
                     <description>Collapses the menu when the user clicks outside of the menu.</description>
                     <returnType type="Boolean" />
                 </property>
+                <property key="closeTabOutside" type="expression" defaultValue="true">
+                    <caption>Close on tab outside?</caption>
+                    <description>Collapses the menu when the user tabs outside of the menu.</description>
+                    <returnType type="Boolean" />
+                </property>
                 <property key="openOverride" type="expression" defaultValue="" required="false">
                     <caption>Override open state</caption>
-                    <description>Optional boolean expression to control the menu outside the widget</description>
+                    <description>(Optional) boolean expression. When the expression becomes true, the menu is forced open. False forces it to close. Can be used to make the menu open by default.</description>
                     <returnType type="Boolean" />
                 </property>
                 <property key="debugMode" type="boolean" defaultValue="false">
@@ -115,6 +121,11 @@
                 <property key="tagAriaLabel" type="textTemplate"
                     required="false">
                     <caption>Tag aria label</caption>
+                    <description></description>
+                </property>
+                <property key="modalAriaLabel" type="textTemplate"
+                    required="false">
+                    <caption>Modal aria label</caption>
                     <description></description>
                 </property>
             </propertyGroup>
