@@ -16,27 +16,25 @@ It is a React-based replacement for the Dojo-based [Slide in Slide out ](https:/
 ## Usage
 ### General settings
 ![general](https://github.com/bsgriggs/mendix-slide-menu/blob/media/general.png)  
-#### Style
 **Tag type** - Determines the content of the button that opens the menu
 
 - Text - Basic text template - 'Tag text'
 - Custom - A new box for content appears on the Mendix page allowing you to put any content you want in the button like an icon.  
-
-Using the Tag Type "Custom" will add the Aria Label option to the widget settings (second image below). This is so screen readers know what the content of the button means.  
-![accessibility](https://github.com/bsgriggs/mendix-slide-menu/blob/media/accessibility.png)  
 
 **Screen side** - Determines which side of the screen the tag is fixed on.  
 **Menu length** - String expression that is expected to be a valid CSS length. For screen sides **Left or Right**, this is the menu's **Width**. For screen sides **Top or Bottom**, this is the menu's **Height**.  
 **Center?** - When enabled, the tag is fixed to the center of the side of the screen.  
 **Tag offset** - Only available if Center is set to No. Otherwise, it is an expression expected to be a valid CSS length. For screen sides **Left or Right**, this is the distance from the **Top** of the screen. For screen sides **Top or Bottom**, this is the distance from the **Left** of the screen.  
 
-#### Customization  
+## Customization 
+![general](https://github.com/bsgriggs/mendix-slide-menu/blob/media/customization.png)  
 **Close on click outside** - Boolean expression that determines if the menu should automatically close when the user clicks outside of the menu  
+**Close on tab outside** - Boolean expression that determines if the menu should automatically close when the user tabs outside of the menu  
+**Override open state** - (Optional) boolean expression. When the expression becomes true, the menu is forced open. False forces it to close. Can be used to make the menu open by default.  
 **Debug mode** - Enables the widget's actions being logged to the browser console  
 **Use portal** - When enabled, the widget's content will be rooted at the end of the body tag. When disabled, the widget's content will be rooted where it appears on the page in Studio Pro. 
 - If the menu is describing something specific on the page (i.e. a list view with search criteria in the slide menu), accessibility requirements say the widget should be near the content it describes.
 - If the menu is not describing something specific on the page (i.e. the menu shows the current user's account information, it is okay to leave the menu content rendering directly in the body DOM.  
-
 
 #### Attributes  
 **Page name** - String attribute that will be set with the name of the current page. This value can then be used to make content specific to a page (details in the 'How to use the Page Name to make a Page-Based FAQ Menu' section below).
@@ -44,9 +42,14 @@ Using the Tag Type "Custom" will add the Aria Label option to the widget setting
 
 ### Events
 ![events](https://github.com/bsgriggs/mendix-slide-menu/blob/media/events.png)  
-**On tag click** - Action triggered when the user clicks on the button to expand or collapse the menu.
-**On click outside** - Action triggered when the user clicks on anything outside the menu (including the tag button).
-**On change** - Action triggered when the Page Name attribute's value changes.
+**On tag click** - Action triggered when the user clicks on the button to expand or collapse the menu.  
+**On click outside** - Action triggered when the user clicks on anything outside the menu (including the tag button).  
+**On change** - Action triggered when the Page Name attribute's value changes.  
+
+### Accessibility
+![accessibility](https://github.com/bsgriggs/mendix-slide-menu/blob/media/accessibility.png)  
+**Tag aria label** - Aria label for the button that opens or closes the menu.  
+**Modal aria label** - Aria label for the content of the menu.  
 
 ## How to use the Page Name to make a Page-Based FAQ Menu
 For this example, we will use the following persistent data structure.  
@@ -80,7 +83,7 @@ https://github.com/bsgriggs/mendix-slide-menu/issues
 
 ## Development and contribution
 
-1. Install NPM package dependencies by using: `npm install`. If you use NPM v7.x.x, which can be checked by executing `npm -v`, execute: `npm install --legacy-peer-deps`.
+1. Install NPM package dependencies by using: `npm install`.  
 2. Run `npm run dev` to watch for code changes. On every change:
     - the widget will be bundled;
     - the bundle will be included in a `dist` folder in the root directory of the project;
