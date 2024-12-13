@@ -30,6 +30,7 @@ It is a React-based replacement for the Dojo-based [Slide in Slide out ](https:/
 ![customization](https://github.com/bsgriggs/mendix-slide-menu/blob/media/customization.png)  
 **Close on click outside** - Boolean expression that determines if the menu should automatically close when the user clicks outside of the menu  
 **Close on tab outside** - Boolean expression that determines if the menu should automatically close when the user tabs outside of the menu  
+**Toggle on hover** - When true, the user can open the menu by hovering their housing on the button and close the menu by moving their mouse outside of the menu.  
 **Override open state** - (Optional) boolean expression. When the expression becomes true, the menu is forced open. False forces it to close. Can be used to make the menu open by default.  
 **Debug mode** - Enables the widget's actions being logged to the browser console  
 **Use portal** - When enabled, the widget's content will be rooted at the end of the body tag. When disabled, the widget's content will be rooted where it appears on the page in Studio Pro. 
