@@ -9,9 +9,13 @@ It is a React-based replacement for the Dojo-based [Slide in Slide out ](https:/
 
 ## Features
 - Show or hide content on any side of the screen
+- Control where the menu button appears for each widget
 - Ability to have the widget set a string attribute to be the name of the current page ~ useful for page-dependent FAQs
 - Option to have the menu automatically close when the user clicks away
+- Option to have the menu automatically close when the user tabs away
+- Option to have the menu open by default
 - Option to either have the menu's DOM at the very end of the body or where the menu would be in the page structure
+- Passes WCAG AA accessibility requirements according to [Axe Dev Tools](https://www.deque.com/axe/devtools/) automated testing
 
 ## Usage
 ### General settings
@@ -33,9 +37,10 @@ It is a React-based replacement for the Dojo-based [Slide in Slide out ](https:/
 **Toggle on hover** - When true, the user can open the menu by hovering their housing on the button and close the menu by moving their mouse outside of the menu.  
 **Override open state** - (Optional) boolean expression. When the expression becomes true, the menu is forced open. False forces it to close. Can be used to make the menu open by default.  
 **Debug mode** - Enables the widget's actions being logged to the browser console  
-**Use portal** - When enabled, the widget's content will be rooted at the end of the body tag. When disabled, the widget's content will be rooted where it appears on the page in Studio Pro. 
-- If the menu is describing something specific on the page (i.e. a list view with search criteria in the slide menu), accessibility requirements say the widget should be near the content it describes.
-- If the menu is not describing something specific on the page (i.e. the menu shows the current user's account information, it is okay to leave the menu content rendering directly in the body DOM.  
+**Use portal** - When enabled, the widget's content will be rooted at the end of the HTML. When disabled, the widget's content will be rooted where it appears on the page in Studio Pro. Consider the following when deciding which setting to use:  
+- If the menu is describing something specific on the page (i.e. a list view with search criteria in the slide menu), accessibility requirements say the widget should be near the content it describes so the setting should be false.
+- If the menu is not describing something specific on the page (i.e. the menu shows the current user's account information, it is okay to leave the menu content rendering directly in the body DOM so the setting should be true.
+- The setting affects the tab order of the button to trigger the menu. When true, the button with be the last tabbable item for the page. When false, the button with be in the tab order of the widget in Studio Pro.  
 
 #### Attributes  
 **Page name** - String attribute that will be set with the name of the current page. This value can then be used to make content specific to a page (details in the 'How to use the Page Name to make a Page-Based FAQ Menu' section below).  
