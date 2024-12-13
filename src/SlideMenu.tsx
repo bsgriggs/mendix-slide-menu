@@ -10,6 +10,7 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
             <Menu
                 {...props}
                 tagText={props.tagText.value as string}
+                toggleOnHover={props.toggleOnHover.value as boolean}
                 closeClickOutside={props.closeClickOutside.value as boolean}
                 closeTabOutside={props.closeTabOutside.value as boolean}
                 openOverride={props.openOverride?.value}
@@ -24,6 +25,7 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
         <Menu
             {...props}
             tagText={props.tagText.value as string}
+            toggleOnHover={props.toggleOnHover.value as boolean}
             closeClickOutside={props.closeClickOutside.value as boolean}
             closeTabOutside={props.closeTabOutside.value as boolean}
             openOverride={props.openOverride?.value}

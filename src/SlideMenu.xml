@@ -72,6 +72,11 @@
                     <description>Collapses the menu when the user tabs outside of the menu.</description>
                     <returnType type="Boolean" />
                 </property>
+                <property key="toggleOnHover" type="expression" defaultValue="false">
+                    <caption>Toggle on mouse hover</caption>
+                    <description>Open the menu on hover of the button and close when the mouse leaves.</description>
+                    <returnType type="Boolean" />
+                </property>
                 <property key="openOverride" type="expression" defaultValue="" required="false">
                     <caption>Override open state</caption>
                     <description>(Optional) boolean expression. When the expression becomes true, the menu is forced open. False forces it to close. Can be used to make the menu open by default.</description>

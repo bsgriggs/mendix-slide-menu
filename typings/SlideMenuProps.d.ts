@@ -25,6 +25,7 @@ export interface SlideMenuContainerProps {
     tagOffset: DynamicValue<string>;
     closeClickOutside: DynamicValue<boolean>;
     closeTabOutside: DynamicValue<boolean>;
+    toggleOnHover: DynamicValue<boolean>;
     openOverride?: DynamicValue<boolean>;
     debugMode: boolean;
     usePortal: boolean;
@@ -55,6 +56,7 @@ export interface SlideMenuPreviewProps {
     tagOffset: string;
     closeClickOutside: string;
     closeTabOutside: string;
+    toggleOnHover: string;
     openOverride: string;
     debugMode: boolean;
     usePortal: boolean;

@@ -17,6 +17,7 @@ interface MenuProps {
     menuLength: string;
     center: boolean;
     tagOffset: string;
+    toggleOnHover: boolean;
     closeClickOutside: boolean;
     closeTabOutside: boolean;
     openOverride: boolean | undefined;
@@ -123,6 +124,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
             })}
             style={props.style}
             ref={menuRef}
+            onMouseLeave={props.toggleOnHover ? () => setOpen(false) : undefined}
         >
             <button
                 ref={tagRef}
@@ -154,6 +156,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
                 tabIndex={props.tabIndex || 0}
                 onClick={onClickHandler}
                 aria-label={props.tagAriaLabel ? props.tagAriaLabel : props.tagText}
+                onMouseEnter={props.toggleOnHover ? () => setOpen(true) : undefined}
             >
                 {props.tagType === "TEXT" ? props.tagText : props.tagContent}
             </button>
@@ -177,7 +180,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
                     left: props.screenSide === "LEFT" ? (open ? 0 : `-${props.menuLength}`) : undefined
                 }}
                 onKeyDown={event => {
-                    if (event.key === "Tab" && props.closeClickOutside) {
+                    if (event.key === "Tab" && props.closeTabOutside) {
                         setTimeout(() => {
                             debugLog("tab clicked", { menu: menuRef.current, active: document.activeElement });
                             if (!menuRef.current?.contains(document.activeElement)) {
@@ -186,6 +189,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
                         }, 100);
                     }
                 }}
+                onMouseEnter={() => setOpen(true)}
             >
                 {showMenuContent ? props.menuContent : <React.Fragment />}
             </div>
