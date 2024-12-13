@@ -96,16 +96,21 @@ const Menu = (props: MenuProps): React.ReactElement => {
     React.useEffect(() => {
         debugLog("open override useEffect, new value:", props.openOverride);
         setOpen(props.openOverride !== undefined ? props.openOverride : false);
-    }, [props.openOverride]);
+    }, [props.openOverride, debugLog]);
 
-    //wait for the menu to visibly close before un-rendering content.
-    //Content must be un-rendered to prevent tabbing
+    // wait for the menu to visibly close before un-rendering content.
+    // Content must be un-rendered to prevent tabbing
     React.useEffect(() => {
         if (open !== showMenuContent) {
             debugLog("update show content useEffect, new value:", open);
-            !open ? setTimeout(() => setShowMenuContent(false), 500) : setShowMenuContent(true);
+            if (!open) {
+                setTimeout(() => setShowMenuContent(false), 500);
+            } else {
+                setShowMenuContent(true);
+            }
         }
-    }, [open]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open, debugLog]);
 
     debugLog("props", props);
 
