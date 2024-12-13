@@ -22,12 +22,12 @@ It is a React-based replacement for the Dojo-based [Slide in Slide out ](https:/
 - Custom - A new box for content appears on the Mendix page allowing you to put any content you want in the button like an icon.  
 
 **Screen side** - Determines which side of the screen the tag is fixed on.  
-**Menu length** - String expression that is expected to be a valid CSS length. For screen sides **Left or Right**, this is the menu's **Width**. For screen sides **Top or Bottom**, this is the menu's **Height**.  
+**Menu length** - CSS width for Screen Side Left or Right and height for Screen Side Top or Bottom (i.e. '30%', '10rem'). For screen sides **Left or Right**, this is the menu's **Width**. For screen sides **Top or Bottom**, this is the menu's **Height**.  
 **Center?** - When enabled, the tag is fixed to the center of the side of the screen.  
 **Tag offset** - Only available if Center is set to No. Otherwise, it is an expression expected to be a valid CSS length. For screen sides **Left or Right**, this is the distance from the **Top** of the screen. For screen sides **Top or Bottom**, this is the distance from the **Left** of the screen.  
 
 ## Customization 
-![general](https://github.com/bsgriggs/mendix-slide-menu/blob/media/customization.png)  
+![customization](https://github.com/bsgriggs/mendix-slide-menu/blob/media/customization.png)  
 **Close on click outside** - Boolean expression that determines if the menu should automatically close when the user clicks outside of the menu  
 **Close on tab outside** - Boolean expression that determines if the menu should automatically close when the user tabs outside of the menu  
 **Override open state** - (Optional) boolean expression. When the expression becomes true, the menu is forced open. False forces it to close. Can be used to make the menu open by default.  
@@ -37,8 +37,8 @@ It is a React-based replacement for the Dojo-based [Slide in Slide out ](https:/
 - If the menu is not describing something specific on the page (i.e. the menu shows the current user's account information, it is okay to leave the menu content rendering directly in the body DOM.  
 
 #### Attributes  
-**Page name** - String attribute that will be set with the name of the current page. This value can then be used to make content specific to a page (details in the 'How to use the Page Name to make a Page-Based FAQ Menu' section below).
-**Interval offset** - 
+**Page name** - String attribute that will be set with the name of the current page. This value can then be used to make content specific to a page (details in the 'How to use the Page Name to make a Page-Based FAQ Menu' section below).  
+**Interval offset** - Time between each check if the page changed. When set to 0, there is no polling.  
 
 ### Events
 ![events](https://github.com/bsgriggs/mendix-slide-menu/blob/media/events.png)  
