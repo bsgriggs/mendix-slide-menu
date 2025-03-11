@@ -131,7 +131,7 @@ export function check(_values: SlideMenuPreviewProps): Problem[] {
         errors.push({
             property: `intervalOffset`,
             message: `Interval offset should be >= 0`,
-            url: "https://github.com/bsgriggs/mendix-slide-menu"
+            url: "https://github.com/bsgriggs/mendix-slide-menu/blob/master/README.md"
         });
     }
     return errors;
