@@ -14,7 +14,9 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
                 closeClickOutside={props.closeClickOutside.value as boolean}
                 closeTabOutside={props.closeTabOutside.value as boolean}
                 openOverride={props.openOverride?.value}
-                menuLength={props.menuLength.value as string}
+                menuLengthDesktop={props.menuLength.value as string}
+                menuLengthTablet={props.menuLengthTablet.value as string}
+                menuLengthPhone={props.menuLengthPhone.value as string}
                 tagOffset={props.tagOffset.value as string}
                 tagAriaLabel={props.tagAriaLabel?.value}
                 modalAriaLabel={props.modalAriaLabel?.value}
@@ -29,7 +31,9 @@ export function SlideMenu(props: SlideMenuContainerProps): React.ReactElement {
             closeClickOutside={props.closeClickOutside.value as boolean}
             closeTabOutside={props.closeTabOutside.value as boolean}
             openOverride={props.openOverride?.value}
-            menuLength={props.menuLength.value as string}
+            menuLengthDesktop={props.menuLength.value as string}
+            menuLengthTablet={props.menuLengthTablet.value as string}
+            menuLengthPhone={props.menuLengthPhone.value as string}
             tagOffset={props.tagOffset.value as string}
             tagAriaLabel={props.tagAriaLabel?.value}
             modalAriaLabel={props.modalAriaLabel?.value}

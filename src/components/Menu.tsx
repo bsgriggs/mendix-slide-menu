@@ -1,9 +1,10 @@
 import React, { createElement } from "react";
 import classNames from "classnames";
-import MxPageName from "../utils/MxPageName";
+import getMxPageName from "../utils/getMxPageName";
 import useOnClickOutside from "../utils/useOnClickOutside";
 import { ActionValue, EditableValue } from "mendix";
 import { ScreenSideEnum, TagTypeEnum } from "../../typings/SlideMenuProps";
+import useWindowWidth from "../utils/useWindowWidth";
 
 interface MenuProps {
     class: string;
@@ -14,7 +15,9 @@ interface MenuProps {
     tagContent: React.ReactNode;
     menuContent: React.ReactNode;
     screenSide: ScreenSideEnum;
-    menuLength: string;
+    menuLengthDesktop: string;
+    menuLengthTablet: string;
+    menuLengthPhone: string;
     center: boolean;
     tagOffset: string;
     toggleOnHover: boolean;
@@ -36,21 +39,40 @@ const Menu = (props: MenuProps): React.ReactElement => {
     const [showMenuContent, setShowMenuContent] = React.useState<boolean>(false);
     const menuRef = React.useRef<HTMLDivElement>(null);
     const tagRef = React.useRef<HTMLButtonElement>(null);
+    const windowWidth = useWindowWidth();
 
     const debugLog = React.useCallback(
         (message?: any, ...optionalParams: any[]) => {
-            if (props.debugMode) {
+            if (props.debugMode === true) {
                 console.log(message, ...optionalParams);
             }
         },
         [props.debugMode]
     );
 
+    const length: string = React.useMemo(() => {
+        let newLength;
+        if (windowWidth > 992) {
+            newLength = props.menuLengthDesktop || "40%";
+            debugLog(`new menu length ${newLength} based on screen width ${windowWidth}. Assumed DESKTOP`);
+        } else if (windowWidth > 768) {
+            newLength = props.menuLengthTablet || "60%";
+            debugLog(`new menu length ${newLength} based on screen width ${windowWidth}. Assumed TABLET`);
+        } else {
+            newLength = props.menuLengthPhone || "85%";
+            debugLog(`new menu length ${newLength} based on screen width ${windowWidth}. Assumed PHONE`);
+        }
+
+        return newLength;
+    }, [props.menuLengthDesktop, props.menuLengthTablet, props.menuLengthPhone, windowWidth, debugLog]);
+
     const updatePageName = React.useCallback(() => {
-        const newPageName = MxPageName();
-        if (props.pageName?.value !== newPageName) {
-            debugLog("updatePageName", `changing page name from '${props.pageName?.value}' to '${newPageName}'`);
-            props.pageName?.setValue(newPageName);
+        if (props.pageName) {
+            const newPageName = getMxPageName();
+            if (props.pageName?.value !== newPageName) {
+                debugLog("updatePageName", `changing page name from '${props.pageName?.value}' to '${newPageName}'`);
+                props.pageName?.setValue(newPageName);
+            }
         }
     }, [props.pageName, debugLog]);
 
@@ -87,7 +109,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
     React.useEffect(() => {
         if (props.pageName && props.intervalOffset > 0) {
             const interval = setInterval(() => {
-                debugLog("polling page name", MxPageName());
+                debugLog("polling page name", getMxPageName());
                 updatePageName();
             }, props.intervalOffset);
             return () => clearInterval(interval);
@@ -115,7 +137,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
 
     debugLog("props", props);
 
-    debugLog("state", { open, showMenuContent, menuRef });
+    debugLog("state", { open, showMenuContent, menuRef, tagRef, windowWidth });
 
     return (
         <div
@@ -137,7 +159,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
                                 : props.tagOffset
                             : props.screenSide === "TOP"
                             ? open
-                                ? props.menuLength
+                                ? length
                                 : 0
                             : undefined,
                     left:
@@ -147,11 +169,11 @@ const Menu = (props: MenuProps): React.ReactElement => {
                                 : props.tagOffset
                             : props.screenSide === "LEFT"
                             ? open
-                                ? props.menuLength
+                                ? length
                                 : 0
                             : undefined,
-                    right: props.screenSide === "RIGHT" ? (open ? props.menuLength : 0) : undefined,
-                    bottom: props.screenSide === "BOTTOM" ? (open ? props.menuLength : 0) : undefined
+                    right: props.screenSide === "RIGHT" ? (open ? length : 0) : undefined,
+                    bottom: props.screenSide === "BOTTOM" ? (open ? length : 0) : undefined
                 }}
                 tabIndex={props.tabIndex || 0}
                 onClick={onClickHandler}
@@ -172,12 +194,12 @@ const Menu = (props: MenuProps): React.ReactElement => {
                         : props.tagText
                 }
                 style={{
-                    width: props.screenSide === "RIGHT" || props.screenSide === "LEFT" ? props.menuLength : "100vw",
-                    height: props.screenSide === "TOP" || props.screenSide === "BOTTOM" ? props.menuLength : "100vh",
-                    top: props.screenSide === "TOP" ? (open ? 0 : `-${props.menuLength}`) : undefined,
-                    right: props.screenSide === "RIGHT" ? (open ? 0 : `-${props.menuLength}`) : undefined,
-                    bottom: props.screenSide === "BOTTOM" ? (open ? 0 : `-${props.menuLength}`) : undefined,
-                    left: props.screenSide === "LEFT" ? (open ? 0 : `-${props.menuLength}`) : undefined
+                    width: props.screenSide === "RIGHT" || props.screenSide === "LEFT" ? length : "100vw",
+                    height: props.screenSide === "TOP" || props.screenSide === "BOTTOM" ? length : "100vh",
+                    top: props.screenSide === "TOP" ? (open ? 0 : `-${length}`) : undefined,
+                    right: props.screenSide === "RIGHT" ? (open ? 0 : `-${length}`) : undefined,
+                    bottom: props.screenSide === "BOTTOM" ? (open ? 0 : `-${length}`) : undefined,
+                    left: props.screenSide === "LEFT" ? (open ? 0 : `-${length}`) : undefined
                 }}
                 onKeyDown={event => {
                     if (event.key === "Tab" && props.closeTabOutside) {

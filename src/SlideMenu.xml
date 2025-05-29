@@ -45,11 +45,6 @@
                     <enumerationValue key="LEFT">Left</enumerationValue>
                 </enumerationValues>
             </property>
-            <property key="menuLength" type="expression" defaultValue="'30%'">
-                <caption>Menu length</caption>
-                <description>CSS width for Screen Side Left or Right and height for Screen Side Top or Bottom (i.e. '30%', '10rem').</description>
-                <returnType type="String" />
-            </property>
             <property key="center" type="boolean" defaultValue="true">
                 <caption>Center?</caption>
                 <description>Centers the tag in the screen.</description>
@@ -57,6 +52,23 @@
             <property key="tagOffset" type="expression" defaultValue="'10%'">
                 <caption>Tag offset</caption>
                 <description>CSS length from the top of the screen for Screen Side Left or Right. For Screen Side Top or Bottom, it is the length from the left of the screen.</description>
+                <returnType type="String" />
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Menu Lengths">
+            <property key="menuLength" type="expression" defaultValue="'40%'">
+                <caption>Desktop</caption>
+                <description>CSS width for Screen Side Left or Right and height for Screen Side Top or Bottom (i.e. '40%', '10rem', '250px').</description>
+                <returnType type="String" />
+            </property>
+            <property key="menuLengthTablet" type="expression" defaultValue="'60%'">
+                <caption>Tablet</caption>
+                <description>CSS width for Screen Side Left or Right and height for Screen Side Top or Bottom (i.e. '40%', '10rem', '250px').</description>
+                <returnType type="String" />
+            </property>
+            <property key="menuLengthPhone" type="expression" defaultValue="'85%'">
+                <caption>Phone</caption>
+                <description>CSS width for Screen Side Left or Right and height for Screen Side Top or Bottom (i.e. '40%', '10rem', '250px').</description>
                 <returnType type="String" />
             </property>
         </propertyGroup>

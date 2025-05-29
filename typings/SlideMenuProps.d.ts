@@ -20,9 +20,11 @@ export interface SlideMenuContainerProps {
     tagContent: ReactNode;
     menuContent: ReactNode;
     screenSide: ScreenSideEnum;
-    menuLength: DynamicValue<string>;
     center: boolean;
     tagOffset: DynamicValue<string>;
+    menuLength: DynamicValue<string>;
+    menuLengthTablet: DynamicValue<string>;
+    menuLengthPhone: DynamicValue<string>;
     closeClickOutside: DynamicValue<boolean>;
     closeTabOutside: DynamicValue<boolean>;
     toggleOnHover: DynamicValue<boolean>;
@@ -51,9 +53,11 @@ export interface SlideMenuPreviewProps {
     tagContent: { widgetCount: number; renderer: ComponentType<{ children: ReactNode; caption?: string }> };
     menuContent: { widgetCount: number; renderer: ComponentType<{ children: ReactNode; caption?: string }> };
     screenSide: ScreenSideEnum;
-    menuLength: string;
     center: boolean;
     tagOffset: string;
+    menuLength: string;
+    menuLengthTablet: string;
+    menuLengthPhone: string;
     closeClickOutside: string;
     closeTabOutside: string;
     toggleOnHover: string;
