@@ -1,12 +1,12 @@
 {
   "name": "slidemenu",
   "widgetName": "SlideMenu",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Widget that allows you to put content in a section on any side of the screen. The user can click a button to expand/collapse the content",
   "copyright": "Benjamin Griggs",
   "author": "Benjamin Griggs",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "license": "MIT",
   "config": {
@@ -25,12 +25,12 @@
     "release": "pluggable-widgets-tools release:web"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "~9.24.0",
+    "@mendix/pluggable-widgets-tools": "~10.21.1",
     "@types/big.js": "^6.0.2"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "sass": "^1.82.0"
+    "classnames": "^2.5.1",
+    "sass": "^1.89.2"
   },
   "resolutions": {
     "react": "18.2.0",

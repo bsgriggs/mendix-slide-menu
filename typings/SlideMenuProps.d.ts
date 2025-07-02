@@ -48,6 +48,8 @@ export interface SlideMenuPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
+    renderMode: "design" | "xray" | "structure";
+    translate: (text: string) => string;
     tagType: TagTypeEnum;
     tagText: string;
     tagContent: { widgetCount: number; renderer: ComponentType<{ children: ReactNode; caption?: string }> };
