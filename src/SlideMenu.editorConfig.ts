@@ -117,6 +117,12 @@ export function getProperties(
         hidePropertyIn(defaultProperties, _values, "tagText");
     }
 
+    if (_values.menuStateType === "EXPRESSION_OVERRIDE") {
+        hidePropertyIn(defaultProperties, _values, "openAttribute");
+    } else {
+        hidePropertyIn(defaultProperties, _values, "openOverride");
+    }
+
     if (_values.pageName.trim() === "") {
         hidePropertyIn(defaultProperties, _values, "onChange");
     }

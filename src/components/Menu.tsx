@@ -3,7 +3,7 @@ import classNames from "classnames";
 import getMxPageName from "../utils/getMxPageName";
 import useOnClickOutside from "../utils/useOnClickOutside";
 import { ActionValue, EditableValue } from "mendix";
-import { ScreenSideEnum, TagTypeEnum } from "../../typings/SlideMenuProps";
+import { MenuStateTypeEnum, ScreenSideEnum, TagTypeEnum } from "../../typings/SlideMenuProps";
 import useWindowWidth from "../utils/useWindowWidth";
 
 interface MenuProps {
@@ -23,7 +23,9 @@ interface MenuProps {
     toggleOnHover: boolean;
     closeClickOutside: boolean;
     closeTabOutside: boolean;
+    menuStateType: MenuStateTypeEnum;
     openOverride: boolean | undefined;
+    openAttribute: EditableValue<boolean> | undefined;
     debugMode: boolean;
     usePortal: boolean;
     pageName?: EditableValue<string>;
@@ -79,8 +81,10 @@ const Menu = (props: MenuProps): React.ReactElement => {
     const callMxAction = React.useCallback(
         (mxAction: ActionValue | undefined, actionName: string) => {
             if (mxAction) {
+                debugLog("callMxAction", `attempting to call action '${actionName}'`, mxAction);
                 if (mxAction.canExecute) {
                     mxAction.execute();
+                    debugLog("callMxAction", `called'${actionName}'`, mxAction);
                 } else {
                     debugLog("callMxAction", `user does not have permission to call action '${actionName}'`);
                 }
@@ -89,8 +93,15 @@ const Menu = (props: MenuProps): React.ReactElement => {
         [debugLog]
     );
 
+    const setMenuState = (newState: boolean): void => {
+        setOpen(newState);
+        if (props.menuStateType === "ATTRIBUTE" && props.openAttribute) {
+            props.openAttribute.setValue(newState);
+        }
+    };
+
     const onClickHandler = (): void => {
-        setOpen(!open);
+        setMenuState(!open);
         updatePageName();
         callMxAction(props.onTabClick, "onTabClick");
     };
@@ -99,7 +110,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
         debugLog("onClickOutside", "Click outside of the slide menu detected");
         if (open && props.closeClickOutside) {
             debugLog("onClickOutside", "closing the menu");
-            setOpen(false);
+            setMenuState(false);
         }
         updatePageName();
         callMxAction(props.onClickOutside, "onClickOutside");
@@ -116,22 +127,29 @@ const Menu = (props: MenuProps): React.ReactElement => {
         }
     }, [props.pageName, debugLog, props.intervalOffset, updatePageName]);
 
+    // handle the menu state changing outside the widget
     React.useEffect(() => {
-        debugLog("open override useEffect, new value:", props.openOverride);
-        setOpen(props.openOverride !== undefined ? props.openOverride : false);
-    }, [props.openOverride, debugLog]);
+        if (props.menuStateType === "EXPRESSION_OVERRIDE") {
+            debugLog("open override useEffect, new value:", props.openOverride);
+            setMenuState(props.openOverride !== undefined ? props.openOverride : false);
+        } else {
+            debugLog("open attribute useEffect, new value:", props.openAttribute);
+            setMenuState(props.openAttribute !== undefined ? props.openAttribute?.value === true : false);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.openOverride, props.openAttribute, props.menuStateType, debugLog]);
 
     // wait for the menu to visibly close before un-rendering content.
     // Content must be un-rendered to prevent tabbing
     React.useEffect(() => {
-        if (open !== showMenuContent) {
-            debugLog("update show content useEffect, new value:", open);
-            if (!open) {
-                setTimeout(() => setShowMenuContent(false), 500);
-            } else {
-                setShowMenuContent(true);
-            }
-        }
+        const handler = setTimeout(
+            () => {
+                setShowMenuContent(open);
+            },
+            open ? 0 : 300
+        );
+
+        return () => clearTimeout(handler);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open, debugLog]);
 
@@ -146,7 +164,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
             })}
             style={props.style}
             ref={menuRef}
-            onMouseLeave={props.toggleOnHover ? () => setOpen(false) : undefined}
+            onMouseLeave={props.toggleOnHover ? () => setMenuState(false) : undefined}
         >
             <button
                 ref={tagRef}
@@ -178,7 +196,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
                 tabIndex={props.tabIndex || 0}
                 onClick={onClickHandler}
                 aria-label={props.tagAriaLabel ? props.tagAriaLabel : props.tagText}
-                onMouseEnter={props.toggleOnHover ? () => setOpen(true) : undefined}
+                onMouseEnter={props.toggleOnHover ? () => setMenuState(true) : undefined}
             >
                 {props.tagType === "TEXT" ? props.tagText : props.tagContent}
             </button>
@@ -206,12 +224,12 @@ const Menu = (props: MenuProps): React.ReactElement => {
                         setTimeout(() => {
                             debugLog("tab clicked", { menu: menuRef.current, active: document.activeElement });
                             if (!menuRef.current?.contains(document.activeElement)) {
-                                setOpen(false);
+                                setMenuState(false);
                             }
                         }, 100);
                     }
                 }}
-                onMouseEnter={() => setOpen(true)}
+                onMouseEnter={() => setMenuState(true)}
             >
                 {showMenuContent ? props.menuContent : <React.Fragment />}
             </div>

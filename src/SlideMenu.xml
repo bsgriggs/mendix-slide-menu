@@ -89,10 +89,26 @@
                     <description>Open the menu on hover of the button and close when the mouse leaves.</description>
                     <returnType type="Boolean" />
                 </property>
+                <property key="menuStateType" type="enumeration" defaultValue="EXPRESSION_OVERRIDE"
+                    required="true">
+                    <caption>Menu state type</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="EXPRESSION_OVERRIDE">Expression Override</enumerationValue>
+                        <enumerationValue key="ATTRIBUTE">Attribute</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="openOverride" type="expression" defaultValue="" required="false">
                     <caption>Override open state</caption>
                     <description>(Optional) boolean expression. When the expression becomes true, the menu is forced open. False forces it to close. Can be used to make the menu open by default.</description>
                     <returnType type="Boolean" />
+                </property>
+                <property key="openAttribute" type="attribute" required="true">
+                    <caption>Open attribute</caption>
+                    <description>Boolean attribute. When the attribute becomes true, the menu is forced open. False forces it to close.</description>
+                    <attributeTypes>
+                        <attributeType name="Boolean" />
+                    </attributeTypes>
                 </property>
                 <property key="debugMode" type="boolean" defaultValue="false">
                     <caption>Debug mode</caption>

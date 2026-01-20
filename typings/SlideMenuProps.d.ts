@@ -10,6 +10,8 @@ export type TagTypeEnum = "TEXT" | "CUSTOM";
 
 export type ScreenSideEnum = "TOP" | "RIGHT" | "BOTTOM" | "LEFT";
 
+export type MenuStateTypeEnum = "EXPRESSION_OVERRIDE" | "ATTRIBUTE";
+
 export interface SlideMenuContainerProps {
     name: string;
     class: string;
@@ -28,7 +30,9 @@ export interface SlideMenuContainerProps {
     closeClickOutside: DynamicValue<boolean>;
     closeTabOutside: DynamicValue<boolean>;
     toggleOnHover: DynamicValue<boolean>;
+    menuStateType: MenuStateTypeEnum;
     openOverride?: DynamicValue<boolean>;
+    openAttribute: EditableValue<boolean>;
     debugMode: boolean;
     usePortal: boolean;
     pageName?: EditableValue<string>;
@@ -63,7 +67,9 @@ export interface SlideMenuPreviewProps {
     closeClickOutside: string;
     closeTabOutside: string;
     toggleOnHover: string;
+    menuStateType: MenuStateTypeEnum;
     openOverride: string;
+    openAttribute: string;
     debugMode: boolean;
     usePortal: boolean;
     pageName: string;
