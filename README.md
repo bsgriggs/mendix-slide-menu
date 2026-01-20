@@ -46,7 +46,9 @@ _This can be verified with `window.innerWidth` in the browser console_
 **Close on click outside** - Boolean expression that determines if the menu should automatically close when the user clicks outside of the menu  
 **Close on tab outside** - Boolean expression that determines if the menu should automatically close when the user tabs outside of the menu  
 **Toggle on hover** - When true, the user can open the menu by hovering their mouse on the button and close the menu by moving their mouse outside of the menu.  
+**Menu state mode** - Define how to customize the open state of the menu.  
 **Override open state** - (Optional) boolean expression. When the expression becomes true, the menu is forced open. False forces it to close. Can be used to make the menu open by default.  
+**Open attribute** - Control the open state of the menu directly with a boolean. If the boolean is true outside the widget, the menu is opened. The widget should keep the state of this boolean up to date.  
 **Debug mode** - Enables the widget's actions to be logged to the browser console  
 **Use portal** - When enabled, the widget's content will be rooted at the end of the HTML. When disabled, the widget's content will be rooted where it appears on the page in Studio Pro. Consider the following when deciding which setting to use:  
 - If the menu is describing something specific on the page (i.e. a list view with search criteria in the slide menu), accessibility requirements say the widget should be near the content it describes, so the setting should be false.
