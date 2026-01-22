@@ -14,6 +14,7 @@ It is a React-based replacement for the Dojo-based [Slide in Slide out ](https:/
 - Option to have the menu automatically close when the user clicks away
 - Option to have the menu automatically close when the user tabs away
 - Option to have the menu open by default
+- Can set the menu's open state to be set to a boolean attribute
 - Option to either have the menu's DOM at the very end of the body or where the menu would be in the page structure
 - Passes WCAG AA accessibility requirements according to [Axe Dev Tools](https://www.deque.com/axe/devtools/) automated testing
 - Able to control the menu's length responsively
