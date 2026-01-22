@@ -7,6 +7,7 @@ import { MenuStateTypeEnum, ScreenSideEnum, TagTypeEnum } from "../../typings/Sl
 import useWindowWidth from "../utils/useWindowWidth";
 
 interface MenuProps {
+    name: string;
     class: string;
     style?: React.CSSProperties;
     tabIndex?: number;
@@ -100,7 +101,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
         }
     };
 
-    const onClickHandler = (): void => {
+    const btnClickHandler = (): void => {
         setMenuState(!open);
         updatePageName();
         callMxAction(props.onTabClick, "onTabClick");
@@ -134,7 +135,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
             setMenuState(props.openOverride !== undefined ? props.openOverride : false);
         } else {
             debugLog("open attribute useEffect, new value:", props.openAttribute);
-            setMenuState(props.openAttribute !== undefined ? props.openAttribute?.value === true : false);
+            setMenuState(props.openAttribute !== undefined ? props.openAttribute.value === true : false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.openOverride, props.openAttribute, props.menuStateType, debugLog]);
@@ -146,7 +147,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
             () => {
                 setShowMenuContent(open);
             },
-            open ? 0 : 300
+            open ? 0 : 500
         );
 
         return () => clearTimeout(handler);
@@ -159,6 +160,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
 
     return (
         <div
+            id={props.name}
             className={classNames("slide-menu", props.class, open ? "open" : "closed", props.screenSide.toLowerCase(), {
                 center: props.center
             })}
@@ -167,6 +169,7 @@ const Menu = (props: MenuProps): React.ReactElement => {
             onMouseLeave={props.toggleOnHover ? () => setMenuState(false) : undefined}
         >
             <button
+                id={`${props.name}-btn`}
                 ref={tagRef}
                 className="btn mx-button tag"
                 style={{
@@ -194,13 +197,14 @@ const Menu = (props: MenuProps): React.ReactElement => {
                     bottom: props.screenSide === "BOTTOM" ? (open ? length : 0) : undefined
                 }}
                 tabIndex={props.tabIndex || 0}
-                onClick={onClickHandler}
+                onClick={btnClickHandler}
                 aria-label={props.tagAriaLabel ? props.tagAriaLabel : props.tagText}
                 onMouseEnter={props.toggleOnHover ? () => setMenuState(true) : undefined}
             >
                 {props.tagType === "TEXT" ? props.tagText : props.tagContent}
             </button>
             <div
+                id={`${props.name}-menu`}
                 className="menu background-main"
                 role={props.usePortal ? "dialog" : undefined}
                 aria-modal={props.usePortal ? "true" : undefined}
@@ -229,7 +233,6 @@ const Menu = (props: MenuProps): React.ReactElement => {
                         }, 100);
                     }
                 }}
-                onMouseEnter={() => setMenuState(true)}
             >
                 {showMenuContent ? props.menuContent : <React.Fragment />}
             </div>

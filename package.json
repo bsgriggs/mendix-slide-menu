@@ -1,7 +1,7 @@
 {
   "name": "slidemenu",
   "widgetName": "SlideMenu",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Widget that allows you to put content in a section on any side of the screen. The user can click a button to expand/collapse the content",
   "copyright": "Benjamin Griggs",
   "author": "Benjamin Griggs",
